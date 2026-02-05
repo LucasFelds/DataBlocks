@@ -26,7 +26,7 @@ CREATE TABLE Statistics (
     mob_slain INT NOT NULL,
     days_elapsed INT NOT NULL,
     world_id INT NOT NULL UNIQUE,
-    FOREIGN KEY (world_id) REFERENCES Worlds(world_id)
+    FOREIGN KEY (world_id) REFERENCES Worlds(world_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Advancements (
@@ -35,7 +35,7 @@ CREATE TABLE Advancements (
     description VARCHAR(255),
     progress INT,
     world_id INT NOT NULL,
-    FOREIGN KEY (world_id) REFERENCES Worlds(world_id)
+    FOREIGN KEY (world_id) REFERENCES Worlds(world_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Farms (
@@ -43,9 +43,9 @@ CREATE TABLE Farms (
     x_coordinate INT NOT NULL,
     y_coordinate INT NOT NULL,
     z_coordinate INT NOT NULL,
-    is_loaded BOOLEAN NOT NULL,
+    is_loaded TINYINT(1) NOT NULL,
     world_id INT NOT NULL,
-    FOREIGN KEY (world_id) REFERENCES Worlds(world_id)
+    FOREIGN KEY (world_id) REFERENCES Worlds(world_id) ON DELETE CASCADE
 );
 
 CREATE TABLE FarmItems (
@@ -53,7 +53,7 @@ CREATE TABLE FarmItems (
     item_name VARCHAR(64) NOT NULL,
     item_yield_per_hour INT NOT NULL,
     farm_id INT NOT NULL,
-    FOREIGN KEY (farm_id) REFERENCES Farms(farm_id)
+    FOREIGN KEY (farm_id) REFERENCES Farms(farm_id) ON DELETE CASCADE
 );
 
 CREATE TABLE StorageUnits (
@@ -64,7 +64,7 @@ CREATE TABLE StorageUnits (
     y_coordinate INT NOT NULL,
     z_coordinate INT NOT NULL,
     world_id INT NOT NULL,
-    FOREIGN KEY (world_id) REFERENCES Worlds(world_id)
+    FOREIGN KEY (world_id) REFERENCES Worlds(world_id) ON DELETE CASCADE
 );
 
 CREATE TABLE StoredItems (
@@ -72,5 +72,5 @@ CREATE TABLE StoredItems (
     item_name VARCHAR(64) NOT NULL,
     quantity INT NOT NULL,
     storage_id INT NOT NULL,
-    FOREIGN KEY (storage_id) REFERENCES StorageUnits(storage_id)
+    FOREIGN KEY (storage_id) REFERENCES StorageUnits(storage_id) ON DELETE CASCADE
 );
